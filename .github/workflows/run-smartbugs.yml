@@ -5,7 +5,8 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        tool: ["slither", "mythril"]
+        #tools: ["slither", "mythril"]
+        tools: ["slither"]
         python-version: ["3.6.9"]
     steps:
       - uses: actions/checkout@v3
@@ -13,12 +14,15 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: setup
         run: git clone https://github.com/smartbugs/smartbugs.git; cd smartbugs; git checkout sb2.0; ./setup-venv.sh
-      - name: Execute ${{ matrix.tool }}
+
+      - name: Execute ${{ matrix.tools }}
         run: cd smartbugs; source venv/bin/activate; ./smartbugs -t ${{ matrix.tool }} -f ../*.sol --sarif --runid github; find results
+
       - name: Upload SARIF file for slither, mode sol
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: smartbugs/results/slither/github/simple_dao.sol/result.sarif
-          category: slither/sol
+          sarif_file: smartbugs/results/${{ matrix.tools }}/github/simple_dao.sol/result.sarif
+          category: ${{ matrix.tools}}/sol
