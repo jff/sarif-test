@@ -16,7 +16,7 @@ jobs:
 
       - name: setup
         shell: pwsh
-        run: git clone https://github.com/smartbugs/smartbugs.git; cd smartbugs; git checkout sb2.0; python3 -m venv venv; ls; ls .\venv\Scripts; Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force; .\venv\Scripts\Activate.ps1; pip install wheel; pip install pyyaml colorama requests semantic_version docker py-cpuinfo; python -m sb -t ${{ matrix.tools }} -f *.sol --sarif --runid github
+        run: git clone https://github.com/smartbugs/smartbugs.git; cd smartbugs; git checkout sb2.0; python3 -m venv venv; ls; ls .\venv\Scripts; Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force; .\venv\Scripts\Activate.ps1; pip install wheel; pip install pyyaml colorama requests semantic_version docker py-cpuinfo; python -m sb -t ${{ matrix.tools }} -f ..\*.sol --sarif --runid github
 
 #      - name: Execute ${{ matrix.tools }}
 #        run: cd smartbugs; source venv/bin/activate; ./smartbugs -t ${{ matrix.tools }} -f ../*.sol --sarif --runid github; find results
