@@ -1,12 +1,12 @@
-name: Run SmartBugs
+name: Run SmartBugs on Windows
 on: [push]
 jobs:
   run-smartbugs:
-    runs-on: windows-latest
+    runs-on: windows-2022
     strategy:
       matrix:
         tools: ["slither"]
-        python-version: ["3.6.9"]
+        python-version: ["3.9.13"]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
