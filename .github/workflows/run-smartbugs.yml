@@ -6,7 +6,6 @@ jobs:
     strategy:
       matrix:
         tool: ["slither"]
-        #contract: ["'samples/simple_dao.*'"]
         python-version: ["3.6.9"]
     steps:
       - uses: actions/checkout@v3
@@ -17,7 +16,7 @@ jobs:
       - name: setup
         run: git clone https://github.com/smartbugs/smartbugs.git; cd smartbugs; git checkout sb2.0; ./setup-venv.sh
       - name: Execute ${{ matrix.tool }} on ${{ matrix.contract }}
-        run: ls; cd smartbugs; source venv/bin/activate; ./smartbugs -t ${{ matrix.tool }} -f ../*.sol --sarif --runid github
+        run: cd smartbugs; source venv/bin/activate; ./smartbugs -t ${{ matrix.tool }} -f ../*.sol --sarif --runid github
       - name: Upload SARIF file for slither, mode sol
         uses: github/codeql-action/upload-sarif@v2
         with:
