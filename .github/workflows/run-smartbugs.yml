@@ -5,7 +5,8 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        tools: ["slither", "mythril-0.23.5", "conkas"]
+        #tools: ["slither", "mythril-0.23.5", "conkas"]
+        tools: ["slither"]
         python-version: ["3.6.9"]
     steps:
       - uses: actions/checkout@v3
