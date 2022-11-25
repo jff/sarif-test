@@ -16,7 +16,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: setup
-        run: git clone https://github.com/smartbugs/smartbugs.git; cd smartbugs; git checkout sb2.0; ./setup-venv.sh
+        run: git clone https://github.com/smartbugs/smartbugs.git; cd smartbugs; git checkout sb2.0; ./install/setup-venv.sh
 
       - name: Execute ${{ matrix.tools }}
         run: cd smartbugs; source venv/bin/activate; ./smartbugs -t ${{ matrix.tools }} -f ../*.sol --sarif --runid github; find results
